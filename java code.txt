@@ -1,0 +1,260 @@
+import java.io.*;
+
+public class ExceptionHandlingDemo {
+  public static void main(String[] args) {
+    try {
+      // Code that may throw an exception
+      readFile("nonexistent.txt");
+    } catch (FileNotFoundException ex) {
+      // Catch the specific exception type
+      System.out.println("Error: " + ex.getMessage());
+    }
+  }
+
+  public static void readFile(String fileName) throws FileNotFoundException {
+    if (!fileExists(fileName)) {
+      throw new FileNotFoundException("File not found: " + fileName);
+    }
+    // Code to read the file goes here
+    System.out.println("Reading file: " + fileName);
+  }
+
+  public static boolean fileExists(String fileName) {
+    // Simulating file existence check
+    return false;
+  }
+}
+
+
+class MyException extends Exception {
+    public MyException(String message) {
+        super(message);
+    }
+}
+
+public class UserDefinedExp {
+    public static void main(String[] args) {
+        try {
+            int age = 15;
+            if (age < 18) {
+                throw new MyException("You must be at least 18 years old.");
+            } else {
+                System.out.println("Access granted! You are eligible.");
+            }
+        } catch (MyException e) {
+            System.out.println("Exception caught: " + e.getMessage());
+        }
+    }
+}
+
+
+
+
+
+import java.applet.Applet;
+import java.awt.Graphics;
+
+public class MyApplet extends Applet {
+  public void init() {
+    // Initialization code goes here
+    System.out.println("Applet initialized");
+  }
+
+  public void start() {
+    // Applet startup code goes here
+    System.out.println("Applet started");
+  }
+
+  public void paint(Graphics g) {
+    // Drawing code goes here
+    g.drawString("Hello, Applet!", 20, 20);
+  }
+
+  public void stop() {
+    // Applet stop code goes here
+    System.out.println("Applet stopped");
+  }
+
+  public void destroy() {
+    // Cleanup code goes here
+    System.out.println("Applet destroyed");
+  }
+}
+
+
+import java.applet.Applet;
+import java.awt.*;
+
+public class LifeCycleApplet extends Applet {
+    public void init() {
+        // Initialization code
+        System.out.println("Initializing the applet...");
+    }
+
+    public void start() {
+        // Code to start or resume the applet
+        System.out.println("Starting the applet...");
+    }
+
+    public void paint(Graphics g) {
+        // Code to draw graphics on the applet
+        g.drawString("Applet Life Cycle", 50, 50);
+    }
+
+    public void stop() {
+        // Code to stop or suspend the applet
+        System.out.println("Stopping the applet...");
+    }
+
+    public void destroy() {
+        // Code to clean up resources used by the applet
+        System.out.println("Destroying the applet...");
+    }
+}
+
+
+
+
+
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+public class ChangeBackground extends JFrame implements ActionListener {
+    
+    JFrame frame;
+    JButton red, green, blue, pink, yellow, magenta, orange;
+    
+    ChangeBackground() {
+        
+        Font font = new Font("Lucida Calligraphy", Font.BOLD, 9);
+        frame = new JFrame("Colourful window");
+        Color c = new Color(255, 255, 255);
+        
+        red = new JButton("RED");
+        red.setBounds(40, 100, 100, 40);
+        red.setFont(font);
+        red.setBackground(c);
+        
+        green = new JButton("GREEN");
+        green.setBounds(110, 150, 100, 40);
+        green.setFont(font);
+        green.setBackground(c);
+        
+        blue = new JButton("BLUE");
+        blue.setBounds(180, 200, 100, 40);
+        blue.setFont(font);
+        blue.setBackground(c);
+        
+        pink = new JButton("PINK");
+        pink.setBounds(250, 250, 100, 40);
+        pink.setFont(font);
+        pink.setBackground(c);
+        
+        yellow = new JButton("YELLOW");
+        yellow.setBounds(320, 300, 100, 40);
+        yellow.setFont(font);
+        yellow.setBackground(c);
+        
+        magenta = new JButton("MAGENTA");
+        magenta.setBounds(390, 350, 100, 40);
+        magenta.setFont(font);
+        magenta.setBackground(c);
+        
+        orange = new JButton("ORANGE");
+        orange.setBounds(460, 400, 100, 40);
+        orange.setFont(font);
+        orange.setBackground(c);
+        
+        frame.add(red);
+        frame.add(green);
+        frame.add(blue);
+        frame.add(pink);
+        frame.add(yellow);
+        frame.add(magenta);
+        frame.add(orange);
+        
+        red.addActionListener(this);
+        green.addActionListener(this);
+        blue.addActionListener(this);
+        pink.addActionListener(this);
+        yellow.addActionListener(this);
+        magenta.addActionListener(this);
+        orange.addActionListener(this);
+        
+        frame.getContentPane().setBackground(Color.black);
+        frame.setLayout(null);
+        frame.setSize(650, 600);
+        frame.setVisible(true);      
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);   
+    }
+    
+    public void actionPerformed(ActionEvent ae)
+    {
+        
+        if(ae.getSource() == red) 
+            frame.getContentPane().setBackground(Color.RED);
+        if(ae.getSource() == green)
+            frame.getContentPane().setBackground(Color.GREEN);
+        if(ae.getSource() == blue)
+            frame.getContentPane().setBackground(Color.BLUE);
+        if(ae.getSource() == pink)
+            frame.getContentPane().setBackground(Color.PINK);
+        if(ae.getSource() == yellow)
+            frame.getContentPane().setBackground(Color.YELLOW);
+        if(ae.getSource() == magenta)
+            frame.getContentPane().setBackground(Color.MAGENTA);
+        if(ae.getSource() == orange)
+            frame.getContentPane().setBackground(Color.ORANGE);
+            
+    }
+    
+    public static void main(String[] args) {
+        
+        new ChangeBackground();
+        
+    }
+    
+}
+
+
+
+//MyClient.java
+import java.io.*;
+import java.net.*;
+
+public class MyClient {
+  public static void main(String[] args) {
+    try {
+      Socket s = new Socket("localhost", 6666);
+      DataOutputStream dout = new DataOutputStream(s.getOutputStream());
+      dout.writeUTF("Hello Server");
+      s.close();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+}
+
+
+
+//MyServer.java
+import java.io.*;
+import java.net.*;
+
+public class MyServer {
+  public static void main(String[] args) {
+    try {
+      ServerSocket ss = new ServerSocket(6666);
+      Socket s = ss.accept();// establishes connection
+      DataInputStream dis = new DataInputStream(s.getInputStream());
+      String str = (String) dis.readUTF();
+      System.out.println("message= " + str);
+      ss.close();
+    } catch (Exception e) {
+      System.out.println(e);
+    }
+  }
+}
